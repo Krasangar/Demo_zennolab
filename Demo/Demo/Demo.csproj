@@ -1,0 +1,67 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <IsPackable>false</IsPackable>
+        <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+
+        <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+        <IsRoslynComponent>true</IsRoslynComponent>
+
+        <RootNamespace>Demo</RootNamespace>
+        <PackageId>Demo</PackageId>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PackageScribanIncludeSource>true</PackageScribanIncludeSource>
+    </PropertyGroup>
+    
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.3.0"/>
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.3.0"/>
+        <PackageReference Include="Scriban" Version="5.9.1" IncludeAssets="Build"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Proto5\Templates\GrpcMappingAttribute.txt" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Proto5\Templates\GrpcMappingAttributeTemplate.txt" />
+      <None Remove="Proto5\Templates\GrpcInterfaceAttributeTemplate.txt" />
+      <None Remove="Proto5\Templates\ApiControllerRenderTemplate.txt" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Proto5\GrpcSourceGeneratorPipeline.cs">
+        <DependentUpon>GrpcSourceGenerator.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Proto5\GrpcSourceGeneratorBuilder.cs">
+        <DependentUpon>GrpcSourceGenerator.cs</DependentUpon>
+      </Compile>
+      <Compile Update="GrpcSourceGeneratorBuilder.cs">
+        <DependentUpon>GrpcSourceGenerator.cs</DependentUpon>
+      </Compile>
+      <Compile Update="GrpcSourceGeneratorPipeline.cs">
+        <DependentUpon>GrpcSourceGenerator.cs</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="Templates\ApiControllerRenderTemplate.txt" />
+      <EmbeddedResource Include="Templates\GrpcInterfaceAttributeTemplate.txt" />
+      <EmbeddedResource Include="Templates\GrpcMappingAttributeTemplate.txt" />
+    </ItemGroup>
+
+
+</Project>

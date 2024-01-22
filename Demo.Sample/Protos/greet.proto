@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option csharp_namespace = "Demo.Sample";
+
+package greet;
+
+service ProductsApi {
+  rpc ProductsMethod (MethodRequest) returns (MethodResponse);
+}
+
+service MyGrpcApi {
+  rpc Method (MethodRequest) returns (MethodResponse);
+}
+
+message MethodRequest {
+  string name = 1;
+  int32 age = 2;
+}
+
+message MethodResponse {
+  string result = 1;
+}
